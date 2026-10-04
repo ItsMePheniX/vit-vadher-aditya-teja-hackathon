@@ -3,7 +3,7 @@
 > **S&P Global & Crisil Campus Hackathon 2026** | Individual Submission  
 > **Author**: Vadher Aditya Teja | **Deadline**: 12 Oct 2026
 
-## 🚀 Project: Financial Risk NLP Engine
+## Project: Financial Risk NLP Engine
 
 A real-time financial risk intelligence platform that ingests news / market events, runs **FinBERT** sentiment analysis, classifies events, estimates market impact and signal half-life, and surfaces live alerts through a React dashboard.
 
