@@ -1,0 +1,129 @@
+# ── Application ───────────────────────────────────────────────────────────────
+app:
+  name: "Financial Risk NLP Engine"
+  version: "0.1.0"
+  description: "S&P Global & Crisil Campus Hackathon 2026"
+
+# ── API server ────────────────────────────────────────────────────────────────
+api:
+  host: "0.0.0.0"
+  port: 8000
+  log_level: "info"
+
+# ── NLP engine ────────────────────────────────────────────────────────────────
+nlp:
+  device: "cpu"          # change to "cuda" if GPU available
+
+  # Sentiment — FinBERT (Apache-2.0)
+  # score = positive_prob - negative_prob  →  [-1, 1]
+  sentiment_model: "ProsusAI/finbert"
+  sentiment_max_length: 512
+  sentiment_batch_size: 8
+  sentiment_cache_size: 512   # LRU cache entries
+
+  # Event classification — zero-shot NLI (CPU-friendly DistilBERT)
+  # Swap for "facebook/bart-large-mnli" for higher accuracy (slower)
+  classifier_model: "typeform/distilbert-base-uncased-mnli"
+  # Hypothesis template: {label} is replaced by the label description below
+  classifier_hypothesis: "This financial news is about {label}."
+  classifier_cache_size: 256
+
+  # Human-readable label descriptions fed to the NLI model as candidate labels.
+  # Edit these descriptions to tune classification without retraining.
+  event_labels:
+    Geopolitical:       "geopolitical events, wars, trade disputes, sanctions, or international conflicts"
+    Macroeconomic:      "macroeconomic data, monetary policy, interest rates, inflation, GDP, or central bank decisions"
+    Credit Event:       "credit rating downgrades, debt defaults, bankruptcies, or bond restructuring events"
+    Merger/Acquisition: "corporate mergers, acquisitions, takeovers, buyouts, or deal announcements"
+    Earnings:           "quarterly earnings results, revenue beats or misses, EPS, or financial guidance"
+    Regulatory:         "regulatory actions, government fines, SEC investigations, or compliance enforcement"
+    Product Launch:     "new product releases, technology launches, or innovation announcements"
+    Other:              "general financial or business news not covered by other categories"
+
+  # Half-life: how many hours before the signal's market relevance halves.
+  # Longer for structural events (geopolitical, M&A), shorter for scheduled ones (earnings).
+  # Informed by Tetlock (2007) and Mitchell & Mulherin (1994) — see docs/ASSUMPTIONS.md.
+  half_life_hours:
+    Geopolitical:       72.0
+    Macroeconomic:      48.0
+    Credit Event:       96.0   # Ratings changes have prolonged repricing effects
+    Merger/Acquisition: 168.0  # Deal uncertainty lasts weeks
+    Earnings:           12.0   # Price discovery typically within one session
+    Regulatory:         96.0
+    Product Launch:     36.0
+    Other:              24.0
+
+  # Evidence extraction: max sentences to return as signal evidence
+  evidence_max_sentences: 2
+
+  # JSONL output path (append-only)
+  signals_path: "data/signals.jsonl"
+
+# ── Ingestor ──────────────────────────────────────────────────────────────────
+ingestor:
+  queue_maxsize: 1000
+  poll_interval_seconds: 5
+  synthetic_feed: true   # set false to use NewsAPI (requires NEWS_API_KEY in .env)
+
+# ── Alert thresholds ─────────────────────────────────────────────────────────
+alerts:
+  impact_threshold: 7          # alert if impact >= this
+  sentiment_threshold: -0.5    # alert if sentiment <= this (negative shock)
+  confidence_threshold: 0.6    # only alert when confidence >= this
+
+# ── Portfolio risk module ─────────────────────────────────────────────────────
+portfolio:
+  default_tickers:
+    - "AAPL"
+    - "MSFT"
+    - "JPM"
+    - "GS"
+    - "XOM"
+  lookback_days: 252    # 1 trading year for VaR
+  var_confidence: 0.95
+
+# ── Corroboration ─────────────────────────────────────────────────────────────
+# Controls how multiple items about the same (entity, event_type) are merged
+# inside a rolling time window before emitting a corroborated signal.
+corroboration:
+  window_minutes: 60          # rolling window size
+  min_items: 1                # emit even if only one item (pass-through)
+
+  # Confidence boost per additional distinct source (additive, capped at 1.0)
+  source_boost_per_source: 0.05   # +5 % per extra distinct source
+  source_boost_max: 0.25          # cap total boost at +25 %
+
+  # Social (tweet-like) items have inherently lower base confidence
+  social_source_penalty: 0.10     # −10 % if single social source, no news corroboration
+
+  # Pump filter — burst of near-duplicate social items from low-credibility sources
+  pump_filter:
+    enabled: true
+    window_minutes: 10          # sub-window to detect pump bursts
+    burst_threshold: 5          # ≥ N social items in window_minutes triggers filter
+    similarity_threshold: 0.80  # Jaccard token overlap to consider items near-duplicate
+    confidence_penalty: 0.30    # −30 % confidence when pump detected
+
+  # Source credibility tiers (multiplier applied to confidence before boosting)
+  source_credibility:
+    reuters:   1.00
+    bloomberg: 1.00
+    wsj:       1.00
+    ft:        1.00
+    cnbc:      0.90
+    gdelt:     0.85
+    kaggle_financial_news: 0.85
+    kaggle_tweets:         0.60
+    twitter:               0.60
+    social:                0.60
+    manual:                0.70
+    synthetic:             0.50
+    default:               0.75  # fallback for unknown sources
+
+# ── Entity state (decayed sentiment) ─────────────────────────────────────────
+state:
+  # Sentiment decays exponentially: S(t) = S(t0) * exp(-ln2 * dt / half_life)
+  # half_life comes from signal.half_life_hours on a per-signal basis.
+  # The entity-level state is the sum of all active (non-expired) signal contributions.
+  decay_check_interval_seconds: 30   # how often the state store prunes expired signals
+  min_active_sentiment: 0.01         # signals below this absolute value are pruned
