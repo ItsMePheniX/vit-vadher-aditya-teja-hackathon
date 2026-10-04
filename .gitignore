@@ -46,6 +46,8 @@ Thumbs.db
 # Large data dumps  (small samples in data/ are fine)
 data/raw/
 data/cache/
+data/prices_cache/
+data/impact_model/*.joblib
 
 # Node
 node_modules/
