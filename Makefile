@@ -55,6 +55,22 @@ train:
 train-offline:
 	PYTHONPATH=. $(PYTHON) scripts/train_impact.py --offline
 
+## stress-build: generate the synthetic portfolio CSV (~1000 positions)
+stress-build:
+	PYTHONPATH=. $(PYTHON) -c "from src.modules.stress_test.portfolio_builder import build_portfolio; df=build_portfolio(); print(f'Portfolio: {len(df)} positions')"
+
+## stress-run: manually run one stress test on a Credit Event signal
+stress-run:
+	PYTHONPATH=. $(PYTHON) -c "\
+from src.modules.stress_test.trigger import StressTrigger; \
+from src.engine.schema import Signal; \
+from datetime import datetime, timezone; \
+import json; \
+sig = Signal(id='manual_001', ts=datetime.now(tz=timezone.utc), entity='JPM', sentiment=-0.8, event_type='Credit Event', impact=9, confidence=0.85, half_life_hours=24.0, evidence=['SVB contagion risk'], sources=['demo']); \
+t = StressTrigger(); r = t.run_now(sig); \
+print(f'Loss: \$\${r.loss:,.0f} ({r.loss_pct*100:.2f}%) | Before: \$\${r.value_before:,.0f} | After: \$\${r.value_after:,.0f}'); \
+[print(f'  {b.asset_class}: loss \$\${b.loss:,.0f} ({b.loss_pct*100:.2f}%)') for b in r.breakdown]"
+
 ## clean: remove venv and Python caches
 clean:
 	rm -rf .venv __pycache__ .pytest_cache

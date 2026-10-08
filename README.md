@@ -38,11 +38,9 @@ News Feed (synthetic / NewsAPI)
 │   Recharts live charts       │
 └─────────────────────────────┘
             │
-┌─────────────────────────────┐
 │   src/modules/              │
-│   ├── portfolio_risk.py     │
-│   ├── alert_engine.py       │
-│   └── report_gen.py         │
+│   ├── stress_test/          │
+│   └── rebalancer/           │
 └─────────────────────────────┘
 ```
 
@@ -90,6 +88,16 @@ npm install && npm run dev
 API docs → http://localhost:8000/docs  
 Dashboard → http://localhost:5173
 
+## Using Docker (Recommended for Jury)
+
+You can launch the entire stack (Backend + Dashboard) with a single command:
+
+```bash
+docker compose up --build
+```
+- The API will be available at `http://localhost:8000/docs`
+- The Dashboard will be available at `http://localhost:5173`
+
 ## Running Tests
 
 ```bash
@@ -103,12 +111,12 @@ pytest tests/ -v
 ├── src/
 │   ├── engine/       # NLP pipeline core
 │   ├── api/          # FastAPI server
-│   ├── modules/      # Portfolio risk, alerts, reports
+│   ├── modules/      # Stress test and NLP Rebalancer
 │   └── dashboard/    # React + Vite frontend
 ├── data/             # Small sample / synthetic datasets
 ├── docs/             # Architecture, assumptions, presentation
 ├── tests/            # pytest test suite
-└── scripts/          # Data download & utility scripts
+└── scripts/          # Data download, model training, backtesting, & report generation
 ```
 
 ## Data & Compliance
