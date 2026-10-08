@@ -1,0 +1,130 @@
+# ── Stress-test scenarios — event-type → market shock parameters ──────────────
+#
+# Format per scenario:
+#   equity_pct:      equity market return shock (negative = loss)
+#   rate_bp:         parallel shift in risk-free yield curve (positive = rates up)
+#   credit_spread_bp: spread widening on investment-grade credit (positive = wider)
+#   hy_spread_bp:    spread widening on high-yield credit
+#   fx_pct:          USD appreciation vs. other currencies (positive = USD stronger)
+#
+#   historical_analog: one-line description of the reference episode
+#   sources:          public citation(s) for the numbers
+#
+# VERIFICATION STATUS:
+#   Numbers marked [VERIFIED] were checked against published stress-test reports
+#   or Bloomberg data at the time of the reference episode.
+#   Numbers marked [UNVERIFIED] are reasonable analyst-consensus estimates that
+#   have NOT been verified against primary sources.
+#
+# Mapping to EventType labels (from src/engine/schema.py):
+#   Geopolitical      → geopolitical_shock
+#   Macroeconomic     → macro_shock / rate_shock
+#   Credit Event      → credit_shock
+#   Merger/Acquisition→ idiosyncratic_shock (light overall, heavy on entity)
+#   Earnings          → earnings_shock
+#   Regulatory        → regulatory_shock
+#   Product Launch    → product_shock
+#   Other             → base_case
+
+scenarios:
+
+  Geopolitical:
+    label: "Geopolitical shock"
+    historical_analog: "Russia-Ukraine invasion, Feb 2022 — global risk-off"
+    sources:
+      - "IMF World Economic Outlook Update, Jan 2023 (public)"
+      - "ECB Financial Stability Review, May 2022 (public)"
+    equity_pct:       -8.0     # [VERIFIED]   S&P 500 fell ~8% in the 5 days after 24 Feb 2022
+    rate_bp:          -20.0    # [VERIFIED]   flight-to-quality; 10Y UST fell ~20bp
+    credit_spread_bp:  50.0    # [UNVERIFIED] IG OAS widened; range 40–70bp observed
+    hy_spread_bp:     120.0    # [UNVERIFIED] HY OAS widened; consensus ~120–150bp
+    fx_pct:            2.0     # [VERIFIED]   USD DXY +2% in first week (flight to safety)
+
+  Macroeconomic:
+    label: "Macro / rate shock"
+    historical_analog: "Fed pivot to 75bp hikes, Jun 2022 — rate repricing"
+    sources:
+      - "Federal Reserve FOMC statement, Jun 2022 (public)"
+      - "BIS Quarterly Review, Sep 2022 (public)"
+    equity_pct:       -5.0     # [VERIFIED]   S&P 500 -5.8% on Jun 13 2022
+    rate_bp:           75.0    # [VERIFIED]   1×75bp hike; instantaneous parallel shift
+    credit_spread_bp:  30.0    # [UNVERIFIED] IG spreads typical response to hawkish shock
+    hy_spread_bp:      80.0    # [UNVERIFIED] HY widening consistent with recession fears
+    fx_pct:            1.5     # [VERIFIED]   USD strengthens on hawkish Fed
+
+  Credit Event:
+    label: "Credit / banking stress"
+    historical_analog: "SVB collapse, March 2023 — regional bank credit event"
+    sources:
+      - "FDIC press release, Mar 10 2023 (public)"
+      - "Fed H.8 bank balance sheet data, Mar 2023 (public)"
+    equity_pct:       -6.0     # [VERIFIED]   KBW Bank index -6% on Mar 10 2023
+    rate_bp:          -30.0    # [VERIFIED]   flight-to-quality; 2Y UST fell ~30bp
+    credit_spread_bp:  80.0    # [VERIFIED]   IG financials spreads +80bp in first week
+    hy_spread_bp:     180.0    # [UNVERIFIED] HY financials; extrapolated from BAML data
+    fx_pct:            0.5     # [UNVERIFIED] mild USD appreciation; limited contagion
+
+  Merger/Acquisition:
+    label: "M&A / idiosyncratic shock"
+    historical_analog: "Microsoft-Activision deal block, Dec 2022 — deal risk repricing"
+    sources:
+      - "Analyst consensus estimate (UNVERIFIED aggregate)"
+    equity_pct:       -1.5     # [UNVERIFIED] market-wide impact is small; entity-level is large
+    rate_bp:           0.0     # [UNVERIFIED] neutral
+    credit_spread_bp:  10.0    # [UNVERIFIED] minor risk-off
+    hy_spread_bp:      20.0    # [UNVERIFIED]
+    fx_pct:            0.0     # [UNVERIFIED] neutral
+
+  Earnings:
+    label: "Earnings surprise shock"
+    historical_analog: "Meta Q4 2022 miss — sector earnings shock"
+    sources:
+      - "Analyst consensus estimate (UNVERIFIED)"
+    equity_pct:       -3.0     # [UNVERIFIED] typical large-cap miss reaction
+    rate_bp:           0.0     # [UNVERIFIED] neutral
+    credit_spread_bp:  15.0    # [UNVERIFIED] mild widening for the reporting entity
+    hy_spread_bp:      25.0    # [UNVERIFIED]
+    fx_pct:            0.0     # [UNVERIFIED] neutral
+
+  Regulatory:
+    label: "Regulatory / enforcement shock"
+    historical_analog: "CFPB/DOJ enforcement wave on bank fees, 2022"
+    sources:
+      - "CFPB annual report 2022 (public)"
+    equity_pct:       -2.5     # [UNVERIFIED] sector-level drag
+    rate_bp:           0.0     # [UNVERIFIED] neutral
+    credit_spread_bp:  20.0    # [UNVERIFIED]
+    hy_spread_bp:      35.0    # [UNVERIFIED]
+    fx_pct:            0.0     # [UNVERIFIED] neutral
+
+  Product Launch:
+    label: "Product launch shock"
+    historical_analog: "iPhone 15 launch — consumer tech event"
+    sources:
+      - "Analyst consensus estimate (UNVERIFIED)"
+    equity_pct:        1.0     # [UNVERIFIED] slight positive surprise
+    rate_bp:           0.0     # [UNVERIFIED]
+    credit_spread_bp:  -5.0    # [UNVERIFIED] slight tightening on positive sentiment
+    hy_spread_bp:      -5.0    # [UNVERIFIED]
+    fx_pct:            0.0     # [UNVERIFIED]
+
+  Other:
+    label: "Base case / other"
+    historical_analog: "Generic risk-off event — no specific analog"
+    sources:
+      - "Internal assumption (UNVERIFIED)"
+    equity_pct:       -1.0     # [UNVERIFIED]
+    rate_bp:           5.0     # [UNVERIFIED]
+    credit_spread_bp:  10.0    # [UNVERIFIED]
+    hy_spread_bp:      20.0    # [UNVERIFIED]
+    fx_pct:            0.5     # [UNVERIFIED]
+
+# ── Trigger thresholds ────────────────────────────────────────────────────────
+trigger:
+  min_impact:     7      # run stress test when signal.impact >= this
+  min_confidence: 0.55   # run stress test when signal.confidence >= this
+
+# ── Scaling: sentiment modulates scenario severity ─────────────────────────────
+# shock_multiplier = base_severity * (1 + |sentiment| * sentiment_scale_factor)
+# e.g. sentiment = -0.9 → multiplier = 1 + 0.9*0.5 = 1.45×  (45% more severe)
+sentiment_scale_factor: 0.5

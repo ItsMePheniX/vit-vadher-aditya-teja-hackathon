@@ -25,7 +25,7 @@ nlp:
   # Swap for "facebook/bart-large-mnli" for higher accuracy (slower)
   classifier_model: "typeform/distilbert-base-uncased-mnli"
   # Hypothesis template: {label} is replaced by the label description below
-  classifier_hypothesis: "This financial news is about {label}."
+  classifier_hypothesis: "This financial news is about {}."
   classifier_cache_size: 256
 
   # Human-readable label descriptions fed to the NLI model as candidate labels.
@@ -127,3 +127,30 @@ state:
   # The entity-level state is the sum of all active (non-expired) signal contributions.
   decay_check_interval_seconds: 30   # how often the state store prunes expired signals
   min_active_sentiment: 0.01         # signals below this absolute value are pruned
+
+# ── Index Rebalancer ──────────────────────────────────────────────────────────
+rebalancer:
+  # Sentiment sensitivity: higher k → sentiment has bigger effect on weights
+  # w_i ∝ base_i * exp(k * decayed_sentiment_i * confidence_i)
+  k: 3.0                    # dimensionless; typical range 1–5
+
+  # Weight constraints (fractions, must sum consistently)
+  min_weight: 0.02          # 2% floor per ticker
+  max_weight: 0.20          # 20% cap per ticker (prevents concentration)
+
+  # Turnover cap per rebalance (sum of |Δw_i| ≤ turnover_cap)
+  # 0.30 = allow up to 30% of portfolio to change hands each rebalance
+  turnover_cap: 0.30
+
+  # Batch rebalance interval in simulated minutes
+  # During replay: rebalance every N sim-minutes of signal time
+  # During live: rebalance every N real minutes
+  rebalance_interval_minutes: 5
+
+  # Keep at most this many weight snapshots in memory (for WS + chart)
+  max_history: 500
+
+  # Base weights (equal weight = 1/15 ≈ 0.0667 each)
+  # Override individual tickers here if needed.
+  # Leave empty to use equal base weights across all 15 tickers.
+  base_weights: {}          # example: { JPM: 0.10, AAPL: 0.10 }
