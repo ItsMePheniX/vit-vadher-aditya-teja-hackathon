@@ -1,11 +1,20 @@
 # vitbhopal-vadher-aditya-teja-hackathon
 
-> **S&P Global & Crisil Campus Hackathon 2026** | Individual Submission  
 > **Author**: Vadher Aditya Teja | **Deadline**: 12 Oct 2026
+> **Tested on**: macOS 14+, Python 3.11, Node.js v18.20+
 
 ## Project: Financial Risk NLP Engine
 
 A real-time financial risk intelligence platform that ingests news / market events, runs **FinBERT** sentiment analysis, classifies events, estimates market impact and signal half-life, and surfaces live alerts through a React dashboard.
+
+> **Demo Video Link**: [Insert YouTube/Loom Link Here]
+
+## Datasets
+All data is **public or synthetically generated**. No proprietary S&P Global / Crisil client data is used.
+- **News**: Subset of the public All-the-News dataset and synthetic samples.
+- **Social Media**: Synthetic tweets replicating the SVB 2023 crash.
+- **Prices**: Fetched dynamically via `yfinance` caching.
+See [`data/DATA_SOURCES.md`](data/DATA_SOURCES.md) for full provenance.
 
 ---
 
@@ -61,28 +70,37 @@ News Feed (synthetic / NewsAPI)
 }
 ```
 
-## Quick Start
+## Quick Start (Clean Machine)
+
+Follow these exact steps to run the engine from a fresh clone:
 
 ```bash
 # 1. Clone & enter
 git clone <repo-url>
-cd vitbhopal-vadher-aditya-teja-hackathon
+cd vit-vadher-aditya-teja-hackathon
 
-# 2. Create venv with uv and install deps
-uv venv --python 3.11
+# 2. Create venv and install dependencies
+python3.11 -m venv .venv
 source .venv/bin/activate
-uv pip install -r requirements.txt
+pip install -r requirements.txt
 
-# 3. Copy env and configure
-cp .env.example .env
-# Edit .env if you have API keys (optional)
+# 3. Generate sample data (or use the committed synthetic samples)
+python scripts/make_sample_data.py
 
-# 4. Run the engine + API
-python -m src.api.main
+# 4. Warm up the ML cache (Downloads FinBERT & NLI models for offline demo use)
+python scripts/warm_cache.py
 
-# 5. Dashboard (separate terminal)
+# 5. Run the Engine & trigger the SVB Replay in one command
+#    Alternatively, use `bash scripts/demo.sh`
+python -m src.run --mode replay --episode svb_march_2023 --speed 60
+```
+
+Open a **separate terminal** to start the dashboard:
+
+```bash
 cd src/dashboard
-npm install && npm run dev
+npm install
+npm run dev
 ```
 
 API docs → http://localhost:8000/docs  
