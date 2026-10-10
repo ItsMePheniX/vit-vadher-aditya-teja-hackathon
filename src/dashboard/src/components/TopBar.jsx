@@ -13,7 +13,6 @@ export function TopBar({ status, signalCount, mode = 'idle', apiOnline = false }
   return (
     <header className="topbar">
       <div className="topbar-brand">
-        <div className="topbar-logo">📡</div>
         <div>
           <div className="topbar-title">FinRisk NLP Engine</div>
           <div className="topbar-subtitle">S&amp;P Global &amp; Crisil Campus Hackathon 2026</div>

@@ -32,7 +32,6 @@ export function LiveFeed({ signals }) {
   if (!signals.length) {
     return (
       <div className="empty-state">
-        <div className="empty-state-icon">📰</div>
         <div className="empty-state-text">Live event feed will appear here</div>
       </div>
     )

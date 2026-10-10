@@ -60,13 +60,13 @@ export default function App() {
       })
       if (resp.ok) {
         const result = await resp.json()
-        setIngestStatus(`✅ ${result.length} signal(s) produced`)
+        setIngestStatus(`Success: ${result.length} signal(s) produced`)
         setIngestText('')
       } else {
-        setIngestStatus('❌ API error — is the server running?')
+        setIngestStatus('Error: API error — is the server running?')
       }
     } catch {
-      setIngestStatus('❌ Cannot reach API (run `make run`)')
+      setIngestStatus('Error: Cannot reach API (run `make run`)')
     }
     setSubmitting(false)
   }, [ingestText])
@@ -94,7 +94,7 @@ export default function App() {
           <div className="card signal-stream-card">
             <div className="card-header">
               <div className="card-title">
-                <span>🧠</span> Signal Stream
+                Signal Stream
                 <span style={{
                   marginLeft: 8, fontSize: 10, padding: '2px 8px',
                   background: sigStatus === 'connected'
@@ -120,7 +120,7 @@ export default function App() {
             {/* Mode controls */}
             <div className="card">
               <div className="card-header">
-                <div className="card-title"><span>⚙️</span> Engine Mode</div>
+                <div className="card-title">Engine Mode</div>
               </div>
               <ModeToggle
                 mode={mode}
@@ -139,7 +139,7 @@ export default function App() {
             <div className="card" style={{ flex: 1 }}>
               <div className="card-header">
                 <div className="card-title">
-                  <span>🛡️</span> Stress Test
+                  Stress Test
                   {stressLatest && (
                     <span style={{
                       marginLeft: 8, fontSize: 10, padding: '2px 8px',
@@ -171,19 +171,19 @@ export default function App() {
           <div className="card chart-card" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <div>
               <div className="card-header">
-                <div className="card-title"><span>📈</span> Sentiment Over Time</div>
+                <div className="card-title">Sentiment Over Time</div>
               </div>
               <SentimentChart signals={signals} />
             </div>
             <div>
               <div className="card-header" style={{ marginTop: 24 }}>
-                <div className="card-title"><span>🏢</span> Entity Sentiment</div>
+                <div className="card-title">Entity Sentiment</div>
               </div>
               <EntityHeatmap signals={signals} />
             </div>
             <div>
               <div className="card-header" style={{ marginTop: 24 }}>
-                <div className="card-title"><span>⚖️</span> Index Weights</div>
+                <div className="card-title">Index Weights</div>
               </div>
               <WeightChart history={weightHistory} />
             </div>
@@ -192,7 +192,7 @@ export default function App() {
           {/* Live feed + ingest */}
           <div className="card feed-card">
             <div className="card-header">
-              <div className="card-title"><span>📰</span> Live Event Feed</div>
+              <div className="card-title">Live Event Feed</div>
             </div>
 
             <form onSubmit={handleIngest} style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
@@ -232,7 +232,7 @@ export default function App() {
           {/* Alerts panel */}
           <div className="card alerts-card">
             <div className="card-header">
-              <div className="card-title"><span>🚨</span> Risk Alerts</div>
+              <div className="card-title">Risk Alerts</div>
               <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>impact ≥ 7 or sent ≤ −0.40</span>
             </div>
             <AlertPanel signals={signals} />

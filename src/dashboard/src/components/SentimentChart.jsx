@@ -31,7 +31,6 @@ export function SentimentChart({ signals }) {
   if (!signals.length) {
     return (
       <div className="empty-state" style={{ height: 200 }}>
-        <div className="empty-state-icon">📊</div>
         <div className="empty-state-text">Chart populates as signals arrive</div>
       </div>
     )

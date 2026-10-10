@@ -79,7 +79,7 @@ Wholesale banking and portfolio teams struggle to digest the massive firehose of
    - *Rebalancer*: Adjusts index weights via $w_i \propto base \times e^{k \cdot sent \cdot conf}$
    - *Stress Tester*: Triggers simulated portfolio shocks.
 
-![bg right:40% 90%](../docs/figures/placeholder_architecture.png)
+![bg right:40% 90%](../docs/architecture.png)
 
 <!--
 - Here is the high-level architecture. Raw data flows in from the left.
