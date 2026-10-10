@@ -1,0 +1,82 @@
+[
+  {
+    "impact": 1,
+    "threshold": -0.0009109313639767992,
+    "upper": -0.0007096402352791519,
+    "lo_pct": -0.09109313639767992,
+    "hi_pct": -0.0709640235279152,
+    "interp": "impact 1 \u2248 -0.09\u2013-0.07% abnormal move vs SPY"
+  },
+  {
+    "impact": 2,
+    "threshold": -0.0007096402352791519,
+    "upper": 0.0011019799229996718,
+    "lo_pct": -0.0709640235279152,
+    "hi_pct": 0.11019799229996718,
+    "interp": "impact 2 \u2248 -0.07\u20130.11% abnormal move vs SPY"
+  },
+  {
+    "impact": 3,
+    "threshold": 0.0011019799229996718,
+    "upper": 0.0011019799229996718,
+    "lo_pct": 0.11019799229996718,
+    "hi_pct": 0.11019799229996718,
+    "interp": "impact 3 \u2248 0.11\u20130.11% abnormal move vs SPY"
+  },
+  {
+    "impact": 4,
+    "threshold": 0.0011019799229996718,
+    "upper": 0.004557088360166791,
+    "lo_pct": 0.11019799229996718,
+    "hi_pct": 0.4557088360166791,
+    "interp": "impact 4 \u2248 0.11\u20130.46% abnormal move vs SPY"
+  },
+  {
+    "impact": 5,
+    "threshold": 0.004557088360166791,
+    "upper": 0.009739751015917461,
+    "lo_pct": 0.4557088360166791,
+    "hi_pct": 0.9739751015917462,
+    "interp": "impact 5 \u2248 0.46\u20130.97% abnormal move vs SPY"
+  },
+  {
+    "impact": 6,
+    "threshold": 0.009739751015917461,
+    "upper": 0.009739751015917461,
+    "lo_pct": 0.9739751015917462,
+    "hi_pct": 0.9739751015917462,
+    "interp": "impact 6 \u2248 0.97\u20130.97% abnormal move vs SPY"
+  },
+  {
+    "impact": 7,
+    "threshold": 0.009739751015917461,
+    "upper": 0.009739751015917461,
+    "lo_pct": 0.9739751015917462,
+    "hi_pct": 0.9739751015917462,
+    "interp": "impact 7 \u2248 0.97\u20130.97% abnormal move vs SPY"
+  },
+  {
+    "impact": 8,
+    "threshold": 0.009739751015917461,
+    "upper": 0.009739751015917461,
+    "lo_pct": 0.9739751015917462,
+    "hi_pct": 0.9739751015917462,
+    "interp": "impact 8 \u2248 0.97\u20130.97% abnormal move vs SPY"
+  },
+  {
+    "impact": 9,
+    "threshold": 0.009739751015917461,
+    "upper": 0.009739751015917461,
+    "lo_pct": 0.9739751015917462,
+    "hi_pct": 0.9739751015917462,
+    "interp": "impact 9 \u2248 0.97\u20130.97% abnormal move vs SPY"
+  },
+  {
+    "impact": 10,
+    "threshold": 0.009739751015917461,
+    "upper": Infinity,
+    "lo_pct": 0.9739751015917462,
+    "hi_pct": null,
+    "interp": "impact 10 \u2248 0.97\u2013\u221e abnormal move vs SPY"
+  }
+]

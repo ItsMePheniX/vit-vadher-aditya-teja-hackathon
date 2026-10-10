@@ -1,0 +1,26 @@
+tweet_id,writer,post_date,body,ticker
+1,FinanceTweets,2023-03-08 09:30:00,"$SVB $SIVB stock is down 20% pre-market after announcing a massive bond sale loss. This could trigger a bank run from VC depositors.",SIVB
+2,BankingAnalyst,2023-03-08 10:00:00,"SVB Financial selling $21B of bonds at a $1.8B loss is alarming. $JPM and $BAC investors are watching closely for contagion.",JPM
+3,MarketWatch_Pro,2023-03-08 14:00:00,"$WFC $BAC $C $GS all down 2-4% in sympathy with SVB. Investors pricing in potential HTM bond losses across regional bank sector.",WFC
+4,HedgeFundView,2023-03-09 08:15:00,"Bank run at $SVB accelerating. Over $40B in deposit withdrawals reportedly attempted Thursday. $JPM should be a safe harbor here.",JPM
+5,CryptoFinance,2023-03-09 09:45:00,"Circle USDC briefly depegged because Circle had $3.3B in SVB. $GS and $JPM have no significant crypto exposure — big difference.",GS
+6,ValueInvesting,2023-03-09 11:30:00,"$BAC Bank of America has $109B in unrealised HTM bond losses. When do we start pricing that in? Different from SVB but worth watching.",BAC
+7,QuickTrades,2023-03-09 15:00:00,"$C Citigroup CEO Jane Fraser's track record of de-risking looks very smart right now. Citi has the most diversified international deposit base.",C
+8,MacroMike,2023-03-10 07:45:00,"FDIC just seized SVB. Largest bank failure since 2008. $JPM $BAC $GS $C $WFC all halted pre-market. This is a systemic risk event.",JPM
+9,RiskOfficer,2023-03-10 09:00:00,"Goldman Sachs $GS research note: SVB is idiosyncratic. VC-concentrated deposit base unusual. The big 4 banks are much better diversified.",GS
+10,SafeHavenBull,2023-03-10 10:30:00,"$JPM JPMorgan is THE safe haven in this crisis. Biggest bank, most diversified, fortress balance sheet. Buying the dip here.",JPM
+11,DepositFlight,2023-03-10 13:00:00,"Talking to startup founders fleeing SVB deposits to $JPM $BAC $C. Velocity of deposit movement is extraordinary. TBTF banks are winning.",BAC
+12,FedWatcher,2023-03-11 16:00:00,"Sources: Treasury and Fed working through weekend on SVB depositor backstop. $GS Goldman analysts briefed on BTFP structure. Game changer.",GS
+13,BankingBear,2023-03-12 08:30:00,"Signature Bank just shut down. Second bank failure in 48hrs. $WFC Wells Fargo has $34B in unrealised HTM losses — bond market knows.",WFC
+14,RegulatoryEye,2023-03-12 09:15:00,"Fed's Bank Term Funding Program allows banks to borrow at par. Removes $BAC's $109B HTM loss risk overnight. Genius move or moral hazard?",BAC
+15,QuarterlyEarns,2023-03-12 12:00:00,"BTFP backstop is bullish for $JPM $BAC $C $GS $WFC. Shorts covering hard. Regional bank crisis contained at the big banks.",JPM
+16,CrisisTrader,2023-03-13 08:00:00,"$BAC Bank of America up 10% at open. $JPM JPMorgan up 5%. $C Citigroup up 6%. Bank crisis over for large caps? Markets think so.",BAC
+17,DeepValueFund,2023-03-13 09:30:00,"$C Citi CEO confirmed zero direct SVB exposure. Jane Fraser runs a much tighter ship than people give credit for. Citi at 0.5x book is a gift.",C
+18,GlobalMacro,2023-03-14 08:00:00,"Credit Suisse falling 15% in Europe but that is a completely different story from $JPM $GS $BAC. Different business model different risks.",JPM
+19,WFCBull,2023-03-14 11:00:00,"$WFC Wells Fargo management reiterated no forced bond sales on analyst call. HTM losses are paper losses not cash losses. Overreaction?",WFC
+20,GoldmanSuperFan,2023-03-15 09:00:00,"$GS Goldman Sachs downgrading regional banks but upgrading $JPM and $BAC citing flight to quality deposit dynamics. Smart call.",GS
+21,RateExpectations,2023-03-15 10:30:00,"Market now pricing 25bps March hike not 50bps after SVB. Fed pivot earlier than expected bullish for $BAC $C $JPM bond portfolios.",BAC
+22,AnalystNote,2023-03-16 08:00:00,"$BAC Bank of America: retail deposit outflows minimal. Corporate treasury clients showed some movement but retail base rock solid.",BAC
+23,WFCSkeptic,2023-03-16 09:30:00,"$WFC Wells Fargo still down 8% on the month despite reassurances. Market not buying the HTM loss narrative fully. Watch closely.",WFC
+24,JPMBull,2023-03-16 11:00:00,"$JPM JPMorgan Q1 earnings estimates rising on deposit inflow data. Best positioned large cap bank coming out of this crisis.",JPM
+25,WeeklyWrap,2023-03-17 09:00:00,"Week in review: $JPM $BAC $C outperformed as safe-haven banks. $GS $WFC underperformed. Regional banks crushed. Fed BTFP changed the game.",JPM
