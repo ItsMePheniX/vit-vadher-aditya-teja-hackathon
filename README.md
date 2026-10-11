@@ -197,7 +197,5 @@ The NLP Engine was evaluated against both an Equal-Weight portfolio and a Naive 
 
 - **Presentation Deck**: [`docs/presentation.pdf`](docs/presentation.pdf) (5–7 slides matching guidelines)
 - **Architecture Diagram**: [`docs/architecture.png`](docs/architecture.png)
-- **Demo Video Script**: [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md)
-- **UI Testing Walkthrough**: [`docs/UI_TESTING.md`](docs/UI_TESTING.md)
 - **Jury Defense & Technical Q&A**: [`docs/JURY_QA.md`](docs/JURY_QA.md)
 - **License**: [MIT](LICENSE)
