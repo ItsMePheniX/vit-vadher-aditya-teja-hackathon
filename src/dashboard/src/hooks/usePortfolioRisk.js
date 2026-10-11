@@ -9,7 +9,7 @@ export function usePortfolioRisk(signals) {
   useEffect(() => {
     async function fetch_risk() {
       try {
-        const resp = await fetch('http://localhost:8000/signals/risk', {
+        const resp = await fetch(`http://${window.location.hostname}:8000/signals/risk`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ signals: signals.slice(0, 20) }),

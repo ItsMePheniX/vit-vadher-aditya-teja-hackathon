@@ -1,0 +1,10 @@
+.git
+.github
+.venv
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.DS_Store
+src/dashboard/node_modules
+src/dashboard/dist

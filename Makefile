@@ -75,3 +75,12 @@ print(f'Loss: \$\${r.loss:,.0f} ({r.loss_pct*100:.2f}%) | Before: \$\${r.value_b
 clean:
 	rm -rf .venv __pycache__ .pytest_cache
 	find . -type d -name __pycache__ -exec rm -rf {} +
+
+## docker-up: build and start both backend and dashboard via Docker Compose
+docker-up:
+	docker compose up --build
+
+## docker-down: stop all docker containers
+docker-down:
+	docker compose down
+
