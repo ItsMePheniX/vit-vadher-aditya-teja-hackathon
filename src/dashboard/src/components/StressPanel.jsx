@@ -210,7 +210,6 @@ export function StressPanel({ latest, history }) {
   if (!latest) {
     return (
       <div className="empty-state">
-        <div className="empty-state-icon">🛡️</div>
         <div className="empty-state-text">No stress tests triggered yet</div>
         <div style={{ fontSize: 11, color: 'var(--text-muted)', textAlign: 'center', maxWidth: 260 }}>
           Start a <strong>Replay</strong> or <strong>Live</strong> session. A stress test fires automatically
@@ -236,7 +235,7 @@ export function StressPanel({ latest, history }) {
             {latest.scenario_name}
           </div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
-            📚 {latest.scenario_name} — historical analog available in scenarios.yaml
+            {latest.scenario_name} — historical analog available in scenarios.yaml
           </div>
         </div>
         <div style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--text-muted)', textAlign: 'right', whiteSpace: 'nowrap' }}>

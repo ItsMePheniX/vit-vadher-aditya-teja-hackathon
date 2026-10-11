@@ -54,7 +54,6 @@ export function SignalTable({ signals, latestId }) {
   if (!signals.length) {
     return (
       <div className="empty-state">
-        <div className="empty-state-icon">📡</div>
         <div className="empty-state-text">Waiting for signals from the NLP engine…</div>
         <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>
           Run <code style={{ fontFamily: 'var(--font-mono)' }}>make run</code> to start the API

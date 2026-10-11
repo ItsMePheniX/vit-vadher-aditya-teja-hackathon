@@ -97,7 +97,7 @@ export function ModeToggle({
           fontSize: 11, color: '#fca5a5', padding: '6px 10px', borderRadius: 6,
           background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)',
         }}>
-          ⚠ {modeError}
+          Error: {modeError}
         </div>
       )}
 
@@ -111,7 +111,7 @@ export function ModeToggle({
             color: tab === t ? 'var(--text-primary)' : 'var(--text-muted)',
             transition: 'all 0.15s',
           }}>
-            {t === 'live' ? '🔴 Live' : '▶ Replay'}
+            {t === 'live' ? 'Live' : 'Replay'}
           </button>
         ))}
       </div>
