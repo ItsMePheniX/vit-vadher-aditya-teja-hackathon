@@ -3,7 +3,7 @@
 **Candidate Name:** Vadher Aditya Teja  
 **College Email ID:** aditya.23bce11755@vitbhopal.ac.in
 **College / Campus:** Vellore Institute of Technology (VIT), Bhopal  
-**Demo Video Link:** 
+**Demo Video Link:** https://youtu.be/C7c9x4O3iFo
 **Slide Deck Link (if hosted externally):** [docs/presentation.pdf](docs/presentation.pdf)  
 
 ---
