@@ -62,7 +62,11 @@ def _fetch_returns(tickers: list[str]) -> pd.DataFrame:
         prices = raw[["Close"]] if "Close" in raw.columns else raw
 
     prices = prices.dropna(how="all").ffill()
+    if prices.empty:
+        raise RuntimeError("Empty price data returned from yfinance")
     returns = np.log(prices / prices.shift(1)).dropna()
+    if returns.empty or len(returns) < 5:
+        raise RuntimeError("Insufficient price returns from yfinance")
     return returns
 
 
