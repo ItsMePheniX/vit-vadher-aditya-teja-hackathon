@@ -50,6 +50,21 @@ export function useStressStream() {
   }, [])
 
   useEffect(() => {
+    fetch(`http://${window.location.hostname}:8000/stress/history?limit=20`)
+      .then(res => res.ok ? res.json() : [])
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setHistory(prev => {
+            const existingIds = new Set(prev.map(r => r.signal_id))
+            const newItems = data.filter(r => !existingIds.has(r.signal_id))
+            return [...prev, ...newItems].slice(0, MAX_HISTORY)
+          })
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
     connect()
     return () => {
       clearTimeout(retryTimer.current)

@@ -66,6 +66,17 @@ export function useWeightStream() {
   }, [])
 
   useEffect(() => {
+    fetch(`http://${window.location.hostname}:8000/weights?limit=50`)
+      .then(res => res.ok ? res.json() : [])
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setHistory(prev => prev.length > 0 ? prev : data)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
     connect()
     return () => {
       clearTimeout(retryTimer.current)

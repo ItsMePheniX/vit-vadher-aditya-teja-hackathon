@@ -56,6 +56,21 @@ export function useSignalStream() {
   }, [])
 
   useEffect(() => {
+    fetch(`http://${window.location.hostname}:8000/signals?limit=50`)
+      .then(res => res.ok ? res.json() : [])
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setSignals(prev => {
+            const existingIds = new Set(prev.map(s => s.id))
+            const newItems = data.filter(s => !existingIds.has(s.id))
+            return [...prev, ...newItems].slice(0, MAX_SIGNALS)
+          })
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
     connect()
     return () => {
       clearTimeout(retryTimer.current)
